@@ -37,13 +37,13 @@ export default function CardView() {
       <Button
         title="<"
         color={"#01A6B3"}
-        
+        onPress={() => handlePreviousItem(carData, setCarData)}
       />
-      <Text style={styles.priceLabel}> VALOR </Text>
+      <Text style={styles.priceLabel}> {carData?.price}</Text>
       <Button
         title=">"
         color={"#01A6B3"}
-        
+        onPress={() => handleNextItem(carData, setCarData)}
       />
     </View>
   );
