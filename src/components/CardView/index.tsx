@@ -6,6 +6,7 @@ const Logo = require('../../../assets/logo.png')
 import { styles } from "./style";
 import Divider from "../Divider";
 import { CAR_ASSETS_BASE_URL } from "../../constants/car";
+import BuyButton from "../BuyButton";
 
 export default function CardView() {
 
@@ -31,6 +32,22 @@ export default function CardView() {
         />
     );
 
+    const renderPriceControls = () => (
+    <View style={styles.priceLabelContainer}>
+      <Button
+        title="<"
+        color={"#01A6B3"}
+        
+      />
+      <Text style={styles.priceLabel}> VALOR </Text>
+      <Button
+        title=">"
+        color={"#01A6B3"}
+        
+      />
+    </View>
+  );
+
     return (
         <View style={styles.imageContainer}>
             {renderLogoBox()}
@@ -41,6 +58,8 @@ export default function CardView() {
             {renderCarImage()}
 
             <Divider />
+
+            <BuyButton/>
         </View>
   );
 
