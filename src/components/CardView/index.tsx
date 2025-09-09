@@ -25,7 +25,9 @@ export default function CardView() {
     const renderCarImage = () => (
         <Image 
             style={styles.image}
-            source={{uri: `${CAR_ASSETS_BASE_URL}1.png`}}
+            source={{
+                uri: `${CAR_ASSETS_BASE_URL}1.png`
+            }}
         />
     );
 
