@@ -8,9 +8,11 @@ export const loadCarData = async (
 ) => {
   try {
     //implemento regras de negocio
-    await fetchGetCarData(id, setCarData);
+    const data = await fetchGetCarData(id);
+    setCarData(data);
   } catch (error) {
     console.error("Erro ao buscar dados da api:", error);
+    setCarData(null);
   }
 };
 
@@ -19,7 +21,8 @@ export const handlePreviousItem = async (
   setCarData: React.Dispatch<React.SetStateAction<CarModel | null>>
 ) => {
   if (carData && carData.id > 1) {
-    await fetchGetCarData(carData.id - 1, setCarData);
+    const data = await fetchGetCarData(carData.id - 1);
+    setCarData(data);
   }
 };
 
@@ -28,6 +31,7 @@ export const handleNextItem = async (
   setCarData: React.Dispatch<React.SetStateAction<CarModel | null>>
 ) => {
   if (carData && carData.id < 10) {
-    await fetchGetCarData(carData.id + 1, setCarData);
+    const data = await fetchGetCarData(carData.id + 1);
+    setCarData(data);
   }
 };

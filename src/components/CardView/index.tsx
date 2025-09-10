@@ -10,7 +10,14 @@ import { CarModel } from "./props";
 import { handleNextItem, handlePreviousItem, loadCarData } from "./actions";
 
 export default function CardView() {
-      const [carData, setCarData] = useState<CarModel | null>(null);
+    const [carData, setCarData] = useState<CarModel | null>(null);
+
+    useEffect(() => {
+        (async () => {
+            await loadCarData(8, setCarData);
+            console.log(carData);
+        })();
+    }, []);
 
     const renderLogoBox = () => (
         <View style={styles.logoContainer}>
@@ -21,7 +28,7 @@ export default function CardView() {
     const renderCarDetails = () => (
         <View style={{ alignItems: "center" }}>
             <Text style={styles.carBrand}>Lamborghini</Text>
-            <Text style={styles.carName}>MODEL</Text>
+            <Text style={styles.carName}>{carData?.carName}</Text>
         </View>
     )
 
@@ -29,26 +36,27 @@ export default function CardView() {
         <Image 
             style={styles.image}
             source={{
-                uri: `${CAR_ASSETS_BASE_URL}1.png`
+                uri: `${CAR_ASSETS_BASE_URL}${carData?.id}.png`
             }}
         />
     );
 
     const renderPriceControls = () => (
-    <View style={styles.priceLabelContainer}>
-      <Button
-        title="<"
-        color={"#01A6B3"}
-        onPress={() => handlePreviousItem(carData, setCarData)}
-      />
-      <Text style={styles.priceLabel}> {carData?.price}</Text>
-      <Button
-        title=">"
-        color={"#01A6B3"}
-        onPress={() => handleNextItem(carData, setCarData)}
-      />
-    </View>
-  );
+        <View style={styles.priceLabelContainer}>
+        <Button
+            title="<"
+            color={"#01A6B3"}
+            onPress={() => handlePreviousItem(carData, setCarData)}
+        />
+        <Text style={styles.priceLabel}> {carData?.price}</Text>
+        <Button
+            title=">"
+            color={"#01A6B3"}
+            onPress={() => handleNextItem(carData, setCarData)}
+        />
+        </View>
+    );
+    
 
     return (
         <View style={styles.imageContainer}>
@@ -62,6 +70,7 @@ export default function CardView() {
             <Divider />
 
             <BuyButton/>
+            {renderPriceControls()}
         </View>
     );
 
