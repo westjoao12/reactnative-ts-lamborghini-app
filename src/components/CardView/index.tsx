@@ -61,6 +61,6 @@ export default function CardView() {
 
             <BuyButton/>
         </View>
-  );
+    );
 
 }
